@@ -1,0 +1,30 @@
+Features
+
+Zero Dependencies: The entire application (structure, styles, and logic) lives in one single file.
+Dynamic Item Management: Add, edit, or remove invoice line items seamlessly with instant DOM updates.
+Real-time Calculations: Instant automatic math updates for item subtotals, custom tax rates, discounts, and the final grand total.
+Print-Ready UI: Built-in CSS print media queries that format the invoice perfectly for physical printing or direct saving as a PDF.
+100% Client-Side: Runs entirely in the browser, ensuring data privacy since no invoice information ever leaves the computer.
+
+Technology Stack
+HTML5: Structured semantic forms, data tables, and user input fields.
+Embedded CSS3: Clean layouts using Flexbox/Grid, paired with dedicated `@media print` rules for paper-accurate layouts.
+Inline JavaScript (ES6): Real-time event listeners (`oninput`, `click`), dynamic row generation, and calculation math.
+
+ Quick Start / Installation
+
+Because this application is self-contained in a single file, setup is instantaneous.
+
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com
+    ```
+2.  Open the application:
+    Simply double-click the `index.html` file to launch the generator immediately in any web browser. 
+OR
+
+You can simply copy the `index.html` file directly to a USB drive or your desktop and use it completely offline.*
+
+Project Structure
+index.html  =>  Self-contained file containing all HTML structure, CSS styling, and JS logic
+
