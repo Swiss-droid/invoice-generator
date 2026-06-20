@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Invoice Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; color: #333; }
+        .invoice-box { max-width: 800px; margin: auto; padding: 30px; border: 1px solid #eee; box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
+        .header { display: flex; justify-content: space-between; margin-bottom: 30px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th { background: #f8f9fa; text-align: left; padding: 10px; border-bottom: 2px solid #ddd; }
+        td { padding: 10px; border-bottom: 1px solid #eee; }
+        input { padding: 5px; width: 90%; border: 1px solid #ccc; border-radius: 4px; }
+        input[type="number"] { width: 80px; }
+        .totals { float: right; width: 300px; margin-top: 20px; }
+        .totals div { display: flex; justify-content: space-between; padding: 5px 0; }
+        .grand-total { font-weight: bold; border-top: 2px solid #333; padding-top: 5px; }
+        .actions { margin-top: 20px; }
+        button { padding: 8px 15px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        @media print {
+            button, .actions, th:last-child, td:last-child { display: none; }
+            .invoice-box { border: none; box-shadow: none; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="invoice-box">
+    <div class="header">
+        <div>
+            <h2>INVOICE</h2>
+            <p><strong>Invoice No:</strong> <input type="text" value="INV-2026-001" style="width:120px;"></p>
+        </div>
+        <div style="text-align: right;">
+            <input type="text" value="ABC Company" style="text-align: right; font-weight: bold;"><br><br>
+            <input type="date" id="invoice-date">
+        </div>
+    </div>
+
+    <table id="invoice-table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="text" value="Web Design Services"></td>
+                <td><input type="number" class="qty" value="1" oninput="calculateInvoice()"></td>
+                <td><input type="number" class="price" value="5000.00" step="0.01" oninput="calculateInvoice()"></td>
+                <td class="row-total">R5000.00</td>
+                <td><button type="button" onclick="deleteRow(this)" style="background:#dc3545;">X</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="actions">
+        <button type="button" onclick="addRow()">+ Add Item</button>
+        <button type="button" onclick="window.print()" style="background:#28a745;">Print / Save PDF</button>
+    </div>
+
+    <div class="totals">
+        <div><span>Subtotal:</span> <span id="subtotal">R5000.00</span></div>
+        <div><span>VAT (15%):</span> <span id="vat">R750.00</span></div>
+        <div class="grand-total"><span>Total Due:</span> <span id="grand-total">R5750.00</span></div>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+
+<script>
+    // Set today's date automatically
+    document.getElementById('invoice-date').valueAsDate = new Date();
+
+    function addRow() {
+        const table = document.getElementById('invoice-table').getElementsByTagName('tbody')[0];
+        const newRow = table.insertRow();
+        newRow.innerHTML = `
+            <td><input type="text" placeholder="Item description"></td>
+            <td><input type="number" class="qty" value="1" oninput="calculateInvoice()"></td>
+            <td><input type="number" class="price" value="0.00" step="0.01" oninput="calculateInvoice()"></td>
+            <td class="row-total">R0.00</td>
+            <td><button type="button" onclick="deleteRow(this)" style="background:#dc3545;">X</button></td>
+        `;
+        calculateInvoice();
+    }
+
+    function deleteRow(button) {
+        c
